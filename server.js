@@ -18,7 +18,16 @@ app.prepare().then(() => {
     console.log("headers", req.headers);
     console.log("query", query);
 
-    await handle(req, res, parsedUrl);
+    res.write(JSON.stringify({
+      url: req.url,
+      headers: req.headers,
+      query,
+      pathname,
+    }))
+    res.end()
+
+    return
+    // await handle(req, res, parsedUrl);
   }).listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://${hostname}:${port}`);
