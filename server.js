@@ -18,13 +18,15 @@ app.prepare().then(() => {
     console.log("headers", req.headers);
     console.log("query", query);
 
-    res.write(JSON.stringify({
-      url: req.url,
-      headers: req.headers,
-      query,
-      pathname,
-    }))
-    res.end()
+    await handle(req, res, parsedUrl)
+
+    // res.write(JSON.stringify({
+    //   url: req.url,
+    //   headers: req.headers,
+    //   query,
+    //   pathname,
+    // }))
+    // res.end()
 
     return
     // await handle(req, res, parsedUrl);
