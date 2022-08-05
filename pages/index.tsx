@@ -12,7 +12,7 @@ const Home: NextPage = (props: any) => {
     </div>
 
     <div>
-      {props.now}
+      NOW: {props.now}
     </div>
   )
 }
