@@ -10,15 +10,21 @@ const Home: NextPage = (props: any) => {
         Headers: <code>{JSON.stringify(props.headers)}</code>
       </div>
     </div>
+
+    <div>
+      {props.now}
+    </div>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const { headers } = ctx.req
+  const now = Date.now()
 
   return {
     props: {
       headers,
+      now,
     },
   }
 }
