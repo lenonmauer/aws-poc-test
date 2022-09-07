@@ -2,18 +2,17 @@ import type { NextPage, GetServerSideProps } from 'next'
 
 const Home: NextPage = (props: any) => {
   return (
-    <div>
-      Hello world2
-      <br />
-      <br />
+    <>
       <div>
-        Headers: <code>{JSON.stringify(props.headers)}</code>
+        Hello world2
+        <br />
+        <br />
+        <div>
+          Headers: <code>{JSON.stringify(props.headers)}</code>
+        </div>
       </div>
-    </div>
-
-    <div>
-      NOW: {props.now}
-    </div>
+      <div>NOW: {props.now}</div>
+    </>
   )
 }
 
