@@ -14,7 +14,7 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    if (!pathname.includes('_next')) {
+    if (!pathname.includes('_next') && !pathname.includes('.ico')) {
       console.log('============================')
       console.log("------pathname------");
       console.log(pathname);
