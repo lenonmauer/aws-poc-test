@@ -14,14 +14,16 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    console.log('============================')
-    console.log("------pathname------");
-    console.log(pathname);
-    console.log("------headers------");
-    console.log(req.headers);
-    console.log("------query------");
-    console.log(query);
-    console.log('============================')
+    if (!pathname.includes('_next')) {
+      console.log('============================')
+      console.log("------pathname------");
+      console.log(pathname);
+      console.log("------headers------");
+      console.log(req.headers);
+      console.log("------query------");
+      console.log(query);
+      console.log('============================')
+    }
 
     await handle(req, res, parsedUrl)
 
