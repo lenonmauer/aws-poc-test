@@ -14,22 +14,18 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     const { pathname, query } = parsedUrl;
 
-    console.log("pathname", pathname);
-    console.log("headers", req.headers);
-    console.log("query", query);
+    console.log('============================')
+    console.log("------pathname------");
+    console.log(pathname);
+    console.log("------headers------");
+    console.log(req.headers);
+    console.log("------query------");
+    console.log(query);
+    console.log('============================')
 
     await handle(req, res, parsedUrl)
 
-    // res.write(JSON.stringify({
-    //   url: req.url,
-    //   headers: req.headers,
-    //   query,
-    //   pathname,
-    // }))
-    // res.end()
-
     return
-    // await handle(req, res, parsedUrl);
   }).listen(port, (err) => {
     if (err) throw err;
     console.log(`> Ready on http://${hostname}:${port}`);
