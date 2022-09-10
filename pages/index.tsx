@@ -5,15 +5,14 @@ import type { NextPage, GetServerSideProps } from 'next'
 
 function useUtm() {
   const { query } = useRouter()
+  const { utm_campaign, utm_source } = query
 
   const tags = useMemo(() => {
-    const { utm_campaign, utm_source } = query
-
     return {
       campaign: utm_campaign,
       source: utm_source,
     }
-  }, [query])
+  }, [utm_campaign, utm_source])
 
   return tags
 }
