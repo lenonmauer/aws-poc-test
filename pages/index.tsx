@@ -1,6 +1,28 @@
+import { useRouter } from 'next/router'
+import { useMemo } from 'react'
+
 import type { NextPage, GetServerSideProps } from 'next'
 
+function useUtm() {
+  const { query } = useRouter()
+
+  const tags = useMemo(() => {
+    const { utm_campaign, utm_source } = query
+
+    return {
+      campaign: utm_campaign,
+      source: utm_source,
+    }
+  }, [query])
+
+  return tags
+}
+
 const Home: NextPage = (props: any) => {
+  const utm = useUtm()
+
+  console.log({ utm })
+
   return (
     <>
       <div>
