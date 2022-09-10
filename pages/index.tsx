@@ -26,14 +26,20 @@ const Home: NextPage = (props: any) => {
   return (
     <>
       <div>
-        Hello world2
-        <br />
-        <br />
-        <div>
-          Headers: <code>{JSON.stringify(props.headers)}</code>
-        </div>
+        <p>Headers:</p>
+        <code>{JSON.stringify(props.headers)}</code>
       </div>
-      <div>NOW: {props.now}</div>
+
+      <hr />
+
+      <div>
+        <p>Source: {utm.source}</p>
+        <p>Campaign: {utm.campaign}</p>
+      </div>
+
+      <hr />
+
+      <p>NOW: {props.now}</p>
     </>
   )
 }
