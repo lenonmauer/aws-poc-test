@@ -1,6 +1,5 @@
-const { createServer } = require("http");
-const { parse } = require("url");
 const next = require("next");
+const express = require('express')
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOST || process.env.IP || "0.0.0.0";
@@ -9,27 +8,27 @@ const port = process.env.PORT || 3000;
 const app = next({ dev, hostname, port });
 const handle = app.getRequestHandler();
 
-app.prepare().then(() => {
-  createServer(async (req, res) => {
-    const parsedUrl = parse(req.url, true);
-    const { pathname, query } = parsedUrl;
+(async () => {
+  try {
+    await app.prepare();
+    const server = express();
 
-    if (!pathname.includes('_next') && !pathname.includes('.ico')) {
-      console.log('============================')
-      console.log("------pathname------");
-      console.log(pathname);
-      console.log("------headers------");
-      console.log(req.headers);
-      console.log("------query------");
-      console.log(query);
-      console.log('============================')
-    }
+    server.get('/redirect', (req, res) => {
+      console.log('received QS');
+      console.log(req.query);
+      res.redirect('/')
+    })
 
-    await handle(req, res, parsedUrl)
+    server.all("*", (req, res) => {
+      return handle(req, res);
+    });
 
-    return
-  }).listen(port, (err) => {
-    if (err) throw err;
-    console.log(`> Ready on http://${hostname}:${port}`);
-  });
-});
+    server.listen(port, (err) => {
+      if (err) throw err;
+      console.log(`> Ready on localhost:${port} - env ${process.env.NODE_ENV}`);
+    });
+  } catch (e) {
+    console.error(e);
+    process.exit(1);
+  }
+})();
